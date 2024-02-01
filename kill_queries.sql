@@ -5,6 +5,9 @@
 
 -- Use this to identify, your job that's sitting idle
 -- replace region-eu with wherever your query ran.
+-- Note that there's a few ways to do this, but this is quick and easy.
+-- JOBS_BY_USER will only return your jobs.
+-- JOBS_BY_PROJECT will return everyones, however needs elevated permissions.
 
 SELECT
  job_id,
@@ -17,6 +20,7 @@ SELECT
  destination_table.dataset_id,
  job_type
 FROM `region-eu`.INFORMATION_SCHEMA.JOBS_BY_USER a
+-- FROM `region-eu`.INFORMATION_SCHEMA.JOBS_BY_PROJECT a
 WHERE state != "DONE"
 AND DATE(creation_time) >= CURRENT_DATE() -1
 
